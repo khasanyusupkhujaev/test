@@ -1,0 +1,60 @@
+{% load static %}
+{% block content %}
+
+    <div class="d-flex flex-column flex-lg-row p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm" id="sidebar">
+
+        <div class="row">
+            <nav class="navbar navbar-expand-sm fixed-top" style="background-color: rgb(255,255,255)">
+                <div class="col-3">
+                     <a href="{% url 'home' %}"><img src="{% static 'main/images/123.svg' %}" style="width:60px;"></a>
+                    &ensp;
+                    <a href="{% url 'home' %}">
+                        <img src="{% static 'main/images/schomem.png' %}" alt="logo" style="width: 100px;">
+                    </a>
+                </div>
+                 <div class="col-4" id="searchdiv">
+
+                    <form class="d-flex" action="{% url 'search_user' %}" method="get">
+                        {% csrf_token %}
+                        <input class="form-control mr-sm-2" id="search" name="search" type="text" placeholder="Search..."
+                               style="width: 70%;" >
+                    </form>
+
+                </div>
+                <div class="col-5">
+                    <a href="{% url 'home' %}"><img
+                            src="{% static 'main/images/home.svg' %}" class="rounded-circle" style="width: 40px;"></a>
+                    <img src="{% static 'main/images/like.png' %}" class="rounded-circle" style="width: 55px;">
+                        {% if request.user.profile.picture %}
+                            <a href="#" data-toggle="dropdown">
+                                <img src="{{ request.user.profile.picture.url }}"
+                                    class="rounded-circle" style="width: 38px;">
+                            </a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="imageDropdown" 
+                            style="margin-left: 140px;" id="navmenu">
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'menu' %}"
+                                    style="color: black; text-decoration: none; font-family: 'Courier New';">Profile</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'logout' %}"
+                                    style="color: black; text-decoration: none; font-family: 'Courier New';">Logout</a></li>
+                            </ul>
+
+                        {% else %}
+                            <a href="#" data-toggle="dropdown">
+                            <img src="{% static 'main/images/user1.png' %}"
+                                 class="rounded-circle" style="width: 38px;"> </a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="imageDropdown"
+                            style="margin-left: 140px;" id="navmenu">
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'menu' %}"
+                                    style="color: black; text-decoration: none; font-family: 'Courier New';">Profile</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'logout' %}"
+                                    style="color: black; text-decoration: none; font-family: 'Courier New';">Logout</a></li>
+                            </ul>
+                        {% endif %}
+                        <span class="caret"></span>
+
+                </div>
+            </nav>
+        </div>
+     </div>
+
+{% endblock %}

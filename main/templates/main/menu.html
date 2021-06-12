@@ -1,0 +1,80 @@
+{% extends "main/layout.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% include "main/navbar.html" %}
+
+     <link rel="stylesheet" href="{% static 'main/custom/myproject.css' %}">
+
+    <div class="container">
+        <div class="row" style="padding-top: 120px">
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                {% if user.profile.picture %}
+                <img src="{{ user.profile.picture.url }}" style="border-radius: 50%; max-width:95%;">
+                {% else %}
+                <img src="{% static 'main/images/user1.png' %}" style="border-radius: 50%; max-width:95%;">
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                <label style="font-size: 30px; font-family: 'Arial'; margin-left: 40px;">
+                    {{ request.user.username }}
+                </label>
+                <label><a href="#">
+                    <button id="settingsbtn" style="background-color: transparent; border: none; outline: none;">
+                     <img src="{% static 'main/images/settings.webp' %}" width="25px"></button>
+                </a>
+                </label><br>
+                <form method="post" enctype="multipart/form-data" style="margin-left: 15%">
+                    {% csrf_token %}
+                    {{form | crispy}}
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br>
+
+    <div class="container">
+        <div class="row">
+            {% for post in posts %}
+            <div class="col-md-4">
+                <img src="{{ post.post.url }}"class="img-responsive img-thumbnail" width="304" height="100"/>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+    <div id="myModal" class="modal">
+            <div class="modal-content">
+                <a href="{% url 'edit' %}" id="change">Edit profile</a>
+                <span id="or1"></span>
+                <a href="{% url 'logout' %}" id="change1">Log out</a>
+                <span id="or1"></span>
+                <span class="closee">Close</span>
+            </div>
+        </div>
+
+    <script src="{% static 'main/custom/myproject1.js' %}"></script>
+
+    <script>
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("settingsbtn");
+        var span = document.getElementsByClassName("closee")[0];
+
+        btn.onclick = function() {
+          modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+    </script>
+
+{% endblock %}

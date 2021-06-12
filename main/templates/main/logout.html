@@ -1,0 +1,29 @@
+{% extends "main/layout.html" %}
+{% block content %}
+{% load static %}
+
+    <div class="row">
+        <div class="col-md-4"></div>
+          <div class="col-md-4" style="padding-top: 120px;">
+            <div class="container" id="loging">
+              <div style=" border:1px solid #000; border-radius: 25px; padding-bottom: 14%;">
+                <div class="row">
+                  <div class="col-md-3"></div>
+                  <div class="col-md-6" style="margin-top: 20%;">
+                    <img src="{% static 'main/images/schomem.png' %}" alt="logo" style="width:100%">
+                  </div>
+                </div>
+                <div style="margin-left: 10%; margin-top: 10%">
+                    <h1>You are logged out.</h1>
+                    <a href="{% url 'login' %}"><button class="btn btn-success btn-lg"
+                    style="width: 50%; margin-left: 18%; margin-top: 10%;
+                    background-color: rgb(101,170,61);">
+                    Log in</button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+{% endblock %}

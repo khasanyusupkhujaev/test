@@ -1,0 +1,42 @@
+{% extends "main/layout.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% include "main/navbar.html" %}
+
+    <div class="container">
+        <div class="row" style="padding-top: 120px">
+            <div class="col-2"></div>
+            <div class="col-2">
+                {% if user.profile.picture %}
+                <img src="{{ user.profile.picture.url }}" style="border-radius: 50%; width: 95%">
+                {% else %}
+                <img src="{% static 'main/images/user1.png' %}" style="border-radius: 50%; width: 95%;">
+                {% endif %}
+            </div>
+            <div class="col-4">
+                <label style="font-size: 30px; font-family: 'Arial'; margin-left: 40px;">
+                    {{ user.username }}
+                </label><br><br>
+            <div class="col-4">
+                <button class="btn btn-primary" style="margin-left: 35px">Follow</button>
+            </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br>
+
+            <div class="container">
+        <div class="row">
+            {% for post in posts %}
+            <div class="col-md-4">
+                <img src="{{ post.post.url }}" class="img-responsive img-thumbnail" width="304" height="100"/>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+            <script src="{% static 'main/custom/myproject1.js' %}"></script>
+    </body>
+
+{% endblock %}

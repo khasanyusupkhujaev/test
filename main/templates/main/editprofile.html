@@ -1,0 +1,36 @@
+{% extends "main/layout.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+    {% include 'main/navbar.html' %}
+
+    <div class="row" style="margin-top: 120px;">
+
+        <div class="col-md-4">
+             {% if request.user.profile.picture %}
+                <img src="{{ request.user.profile.picture.url }}"
+                     id="userpicture" class="rounded-circle" style="margin-left: 10%; width: 55%;">
+            {% else %}
+                 <img src="{% static 'main/images/user1.png' %}"
+                 class="rounded-circle" style="margin-top: 120px; width: 55%;">
+            {% endif %}
+        </div>
+        <div>
+            <form action="" method="POST" enctype="multipart/form-data">
+                <div class="col-md-12">
+                    {% csrf_token %}
+                    {{form | crispy}}
+                <button class="btn btn-primary"><a href="{% url 'editpic' %}"
+                                                   style="color: white; text-decoration: none">
+                    Edit profile picture
+                </a></button>  <br><br>
+                <input type="submit" class="btn btn-success" value="Save">
+                </div>
+
+            </form>
+        </div>
+    </div>
+    
+{% endblock %}

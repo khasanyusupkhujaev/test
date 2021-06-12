@@ -1,0 +1,80 @@
+{% extends "main/layout.html" %}
+{% block content %}
+{% load static %}
+
+  <link href="{% static 'main/custom/myproject.css' %}" rel="stylesheet">
+
+  <body style="max-width: 1520px;">
+
+    <div class="row">
+      <div class="col-md-5"></div>
+      <div class="col-md-4">
+        <nav class="navbar navbar-expand-md">
+          <a class="navbar-brand" href="#">
+          <img src="{% static 'main/images/123.svg' %}" alt="logo" style="width:15%; height: 10%;">
+          <img src="{% static 'main/images/schomem.png' %}" alt="logo" style="width:30%; height: 20%;"></a>
+        </nav>
+        </div>
+    </div>
+
+    <div class="row" >
+      <div class="col-md-1"></div>
+      <div class="col-md-4" style="padding-top: 130px;">
+        <nav id="imagecarousel">
+          <div id="demo" class="carousel slide" data-ride="carousel">
+            <ul class="carousel-indicators">
+              <li data-target="#demo" data-slide-to="0" class="active"></li>
+              <li data-target="#demo" data-slide-to="1"></li>
+              <li data-target="#demo" data-slide-to="2"></li>
+            </ul>
+
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="{% static 'main/images/people1.jpg' %}" alt="singing" style="width: 100%; height: 275px;">
+              </div>
+              <div class="carousel-item">
+                <img src="{% static 'main/images/people2.jpg' %}" alt="smiling" style="width: 100%; height: 275px;">
+              </div>
+              <div class="carousel-item">
+                <img src="{% static 'main/images/people3.jpg' %}" alt="partying" style="width: 100%; height: 275px;">
+              </div>
+            </div>
+
+            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo" data-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </a>
+          </div>
+
+        </nav>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-4" style="padding-top: 80px;">
+        <div class="container" id="loging">
+          <div style=" border:1px solid #000; border-radius: 25px; padding-bottom: 14%;">
+            <div class="row">
+              <div class="col-md-3"></div>
+              <div class="col-md-6" style="padding-top: 4%;">
+                <img src="{% static 'main/images/schomem.png' %}" alt="logo" style="width:100%;"></div>
+            </div>
+            <form action="{% url 'login' %}" method="post">
+              {% csrf_token %}
+              <input type="text" id="usr" class="form-control" placeholder="Username"  name="username" style="width: 90%; margin-left: 5%;"><br>
+              <input type="password" id="psw" class="form-control" placeholder="Password"  name="password" style="width: 90%; margin-left: 5%;"><br>
+              <input type="submit" id="disabledbtn" class="btn btn-primary disabled"  style="width: 90%; margin-left: 5%;" value="Enter"
+                     onclick="login()">
+            </form>
+                <span id="or">OR</span><br>
+              &emsp;&ensp;<span>Don't have an account yet? <a href="{% url 'registration' %}">Register</a></span>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="{% static 'main/custom/myproject.js' %}"></script>
+  </body>
+
+{% endblock %}

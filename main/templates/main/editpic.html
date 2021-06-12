@@ -1,0 +1,28 @@
+{% extends "main/layout.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+    {% include 'main/navbar.html' %}
+
+     <div style="margin-top: 150px; margin-left: 40%;">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="col-md-12">
+                {% if request.user.profile.picture %}
+                <img src="{{ request.user.profile.picture.url }}" class="rounded-circle" style="width: 200px;">
+                {% else %}
+                    <img src="{% static 'main/images/user1.png' %}" class="rounded-circle" style="width: 200px;">
+                {% endif %}
+            </div>
+            <div>
+                {{ form | crispy }}
+                <button type="submit" class="btn btn-success">Update picture</button>
+            </div>
+
+        </form>
+    </div>
+
+</body>
+{% endblock %}

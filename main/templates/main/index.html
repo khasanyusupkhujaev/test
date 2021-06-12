@@ -1,0 +1,94 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block content %}
+{% include 'main/navbar.html' %}
+
+<link rel="stylesheet" href="{% static 'main/custom/myproject.css' %}">
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+     <div style="margin-top: 120px" class="col-sm-12">
+             {% for images in post %}
+                <div>
+                    {% if images.post %}
+                        <img class="rounded-circle" src="{{ images.user.profile.picture.url }}" style="width: 4%; margin-left: 30%">
+                        <strong>{{ images.user.username }}</strong> &emsp;<br><br>                      
+                         <img src="{{ images.post.url }}"
+                         class="img-responsive" style="cursor: pointer; margin-left: 30%; max-height: 40%; max-width: 30%;">
+                        <br>
+                         <form action="{% url 'likepost' %} " method="post" class="ui form">
+                        {% csrf_token %}
+                        <input type="hidden" name="post_id" value="{{ images.id }}">
+                        {% if user not in images.likes.all %}
+                            <button class="btn btn-primary btn-sm" type="submit">Like</button>
+                        {% else %}
+                            <button class="btn btn-danger btn-sm" type="submit">Unlike</button>
+                        {% endif %}
+                        </form>
+                        {% if images.likes.all.count >= 1 %}
+                            <button id="myBtn" style="border: none; background-color:white;">
+                                <strong>Likes: {{ images.likes.all.count }} </strong>
+                            </button>
+                                <div id="myModal" class="modal">
+
+                                    <div class="modal-content">
+                                        <span class="close">&times;</span>
+                                        <h6>Users liked post:</h6>
+                                        {% for like in images.likes.all %}
+                                             {{ like.username }}
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                        {% else %}
+                            <strong>Like: {{ images.likes.all.count }} </strong>
+                        {% endif %}
+                        <h5>Comments:</h5>
+                        {% if not images.comments.all %}
+                            No comments yet
+                            <a href="{% url 'comment' %}">Add one.</a>
+                        {% else %}
+                            {% for comment in images.comments.all %}
+                                <strong>{{ comment.user.username }}</strong> &ensp; {{ comment.body }}<br>
+
+                            {% endfor %}
+                        <a href="{% url 'comment' %}">Add one.</a>
+                        {% endif %}
+                    {% endif %}<br><br><br>
+                    <hr>
+                </div>
+            {% endfor %}
+        </div>
+
+        <script src="{% static 'main/custom/myproject.js' %}"></script>
+
+     <script>
+                var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+     </script>
+
+</body>
+
+{% endblock %}

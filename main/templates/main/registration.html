@@ -1,0 +1,50 @@
+{% extends "main/layout.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+
+  <link rel="stylesheet" href="{% static 'main/custom/myproject.css' %}">
+
+<body style="max-width: 1520px;">
+
+  <div class="row">
+    <div class="col-md-5"></div>
+    <div class="col-md-4">
+      <nav class="navbar navbar-expand-md"> 
+        <a class="navbar-brand" href="#">
+        <img src="{% static 'main/images/123.svg' %}" alt="logo" style="width:15%; height: 10%;">
+        <img src="{% static 'main/images/schomem.png' %}" alt="logo" style="width:30%; height: 20%;"></a>
+      </nav>
+      </div>
+  </div>  
+
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4" style="padding-top: 2%;">
+      <div style="border:1px solid #000; border-radius: 25px; padding-bottom: 8%;">
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+            <img src="{% static 'main/images/schomem.png' %}" alt="logo" style="width:95%; margin-top: 10px;">
+          </div>
+        </div>
+        <form action="{% url 'registration' %}" method="post">
+          {% csrf_token %}
+          <div class="col-md-12">
+              {{form | crispy }}
+          </div>
+            
+          <input type="submit" class="btn btn-primary disabled" id="register"
+                 value="Create user" style="margin-left: 5%; width: 90%;">
+        </form>
+        <br>
+      &emsp;&ensp;<span>Do you have an account? <a href="{% url 'login' %}">Log in</a></span>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+
+  <script src="{% static 'main/custom/myproject.js' %}"></script>
+</body>
+
+{% endblock %}
