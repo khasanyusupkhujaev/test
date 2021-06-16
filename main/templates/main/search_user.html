@@ -13,8 +13,13 @@
                         <div class="card flex-row flex-grow-1 p-2 mx-2 my-2 align-items-center">
                             <a class="profile-link" href="/menu/{{ users.id }}">
                                 <div class="card-image m-2">
+                                    {% if users.profile.picture %}
                                     <img class="rounded-circle" src="{{users.profile.picture.url}}"
                                          style="max-height: 100px; max-width: 100px">
+                                    {% else %}
+                                    <img src="{% static 'main/images/user1.png' %}"
+                                        class="rounded-circle" style="max-height: 100px; max-width: 100px">
+                                    {% endif %}
                                 </div>
                             </a>
                             <a class="profile-link" href="/menu/{{ users.id }}" style="color: #000">
