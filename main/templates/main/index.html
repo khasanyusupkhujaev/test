@@ -30,10 +30,36 @@
                         {% endif %}
                         </form>
                         {% if images.likes.all.count >= 1 %}
-                            <button id="myBtn" style="border: none; background-color:white;">
-                                <strong>Likes: {{ images.likes.all.count }} </strong>
+<!--                            <button id="myBtn" style="border: none; background-color:white;">-->
+<!--                                <strong>Likes: {{ images.likes.all.count }} </strong>-->
+<!--                            </button>-->
+<!--                                <div id="{{ images.id }}" class="modal">-->
+
+<!--                                    <div class="modal-content">-->
+<!--                                        <span class="close">&times;</span>-->
+<!--                                        <h6>Users liked post:</h6>-->
+<!--                                        {% for like in images.likes.all %}-->
+<!--                                             {{ like.username }}-->
+<!--                                        {% endfor %}-->
+<!--                                    </div>-->
+
+<!--                                </div>-->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{ images.id }}">
+                      Launch demo modal
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="{{ images.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
                             </button>
-                                <div id="myModal" class="modal">
+                          </div>
+                          <div class="modal-body">
+                            <div class="modal">
 
                                     <div class="modal-content">
                                         <span class="close">&times;</span>
@@ -44,6 +70,13 @@
                                     </div>
 
                                 </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
                         {% else %}
                             <strong>Like: {{ images.likes.all.count }} </strong>
@@ -70,28 +103,23 @@
      <script>
                 var modal = document.getElementById("myModal");
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+                var btn = document.getElementById("myBtn");
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+                var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks the button, open the modal
-btn.onclick = function() {
-  modal.style.display = "block";
-}
+                btn.onclick = function() {
+                  modal.style.display = "block";
+                }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
+                span.onclick = function() {
+                  modal.style.display = "none";
+                }
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
+                window.onclick = function(event) {
+                  if (event.target == modal) {
+                    modal.style.display = "none";
+                  }
+                }
      </script>
 
 </body>
